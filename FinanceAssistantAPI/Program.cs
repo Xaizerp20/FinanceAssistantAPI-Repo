@@ -1,4 +1,7 @@
 
+using FinanceAssistantAPI.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace FinanceAssistantAPI
 {
     public class Program
@@ -14,7 +17,22 @@ namespace FinanceAssistantAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+
+            builder.Services.AddDbContext<ApplicationDbContext>(option =>
+            {
+                option.UseSqlServer(builder.Configuration.GetConnectionString("DBstring"));
+            });
+
+
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                context.Database.Migrate();
+            }
+
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
