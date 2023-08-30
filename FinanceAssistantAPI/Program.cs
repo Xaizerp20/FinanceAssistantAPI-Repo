@@ -1,6 +1,9 @@
 
 using FinanceAssistantAPI.Data;
+using FinanceAssistantAPI.Repository;
+using FinanceAssistantAPI.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using WEBTEST_API_PROYECT;
 
 namespace FinanceAssistantAPI
 {
@@ -23,8 +26,13 @@ namespace FinanceAssistantAPI
                 option.UseSqlServer(builder.Configuration.GetConnectionString("DBstring"));
             });
 
+            builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+            builder.Services.AddScoped<IFinancialRecordRepository, FinancialRecordRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             var app = builder.Build();
+
 
             using (var scope = app.Services.CreateScope())
             {

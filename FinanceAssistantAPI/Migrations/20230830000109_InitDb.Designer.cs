@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceAssistantAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230829190324_ForeginUsertoFinancial")]
-    partial class ForeginUsertoFinancial
+    [Migration("20230830000109_InitDb")]
+    partial class InitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,11 +46,46 @@ namespace FinanceAssistantAPI.Migrations
                     b.ToTable("ApplicationCategorie", (string)null);
                 });
 
+            modelBuilder.Entity("FinanceAssistantAPI.Models.ApplicationFinancialRecord", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("FinancialRecord", (string)null);
+                });
+
             modelBuilder.Entity("FinanceAssistantAPI.Models.ApplicationUser", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -85,41 +120,7 @@ namespace FinanceAssistantAPI.Migrations
                     b.ToTable("ApplicationUser", (string)null);
                 });
 
-            modelBuilder.Entity("FinanceAssistantAPI.Models.FinancialRecord", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("FinancialRecord", (string)null);
-                });
-
-            modelBuilder.Entity("FinanceAssistantAPI.Models.FinancialRecord", b =>
+            modelBuilder.Entity("FinanceAssistantAPI.Models.ApplicationFinancialRecord", b =>
                 {
                     b.HasOne("FinanceAssistantAPI.Models.ApplicationCategory", "ApplicationCategory")
                         .WithMany()

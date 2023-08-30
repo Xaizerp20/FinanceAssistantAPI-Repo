@@ -74,3 +74,5 @@ C:\Users\xavic\source\repos\FinanceAssistantAPI\FinanceAssistantAPI\obj\Debug\ne
 C:\Users\xavic\source\repos\FinanceAssistantAPI\FinanceAssistantAPI\obj\Debug\net7.0\FinanceAssistantAPI.pdb
 C:\Users\xavic\source\repos\FinanceAssistantAPI\FinanceAssistantAPI\obj\Debug\net7.0\FinanceAssistantAPI.genruntimeconfig.cache
 C:\Users\xavic\source\repos\FinanceAssistantAPI\FinanceAssistantAPI\obj\Debug\net7.0\ref\FinanceAssistantAPI.dll
+C:\Users\xavic\source\repos\FinanceAssistantAPI\FinanceAssistantAPI\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\xavic\source\repos\FinanceAssistantAPI\FinanceAssistantAPI\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

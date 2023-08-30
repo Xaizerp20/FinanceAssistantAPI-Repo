@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinanceAssistantAPI.Models
 {
-    public class ApplicationFinancialRecordDto
+    public class ApplicationFinancialRecord
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] 
@@ -15,12 +15,12 @@ namespace FinanceAssistantAPI.Models
 
         public int CategoryId { get; set; }
 
+        public DateTime Date { get; set; }      // Fecha del gasto
+
         [ForeignKey("CategoryId")]
         public virtual ApplicationCategory ApplicationCategory { get; set; }
 
-        public DateTime Date { get; set; }      // Fecha del gasto
-
-        public string UserId { get; set; }      // Identificador del usuario que registró el gasto
+        public int UserId { get; set; }      // Identificador del usuario que registró el gasto
 
         [ForeignKey("UserId")]
         public virtual ApplicationUser UserAplication { get; set; } // Propiedad de navegación al usuario
